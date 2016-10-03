@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Sign Up Form</title>
+  </head>
+  <body>
+    <form>
+      First name: <input type="text" name="first-name" id="first-name" value="" required="" />
+      <br/>
+      Last name: <input type="text" name="last-name" id="last-name" value="" required="" />
+      <br/>
+      Email: <input type="text" name="email" id="email" value="" required="" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+      <br/>
+      Birthday: <input type="date" name="birthday" id="birthday" required="" />
+      <br/>
+      Favorite sport:
+      <input type="text" list="sport"/>
+      <datalist id="sport">
+          <option value="Football">
+          <option value="Tennis">
+          <option value="Rugby">
+      </datalist>
+      <br/>
+      Bio: <textarea name="bio" id="bio" cols="25" rows="3"></textarea>
+      <br/>
+      <input type="submit" value="submit" />
+      <input type="reset" value="clear" />
+    </form>
+  </body>
+</html>
