@@ -1,0 +1,22 @@
+* {
+  font-size: 14px;
+  font-family: Courier;
+}
+
+header {
+  background-color: #F5F442;
+  text-align: center;
+}
+
+footer {
+  background-color: #626240;
+  text-align: center;
+}
+
+aside {
+  background-color: #7727F7;
+}
+
+nav {
+  background-color: #25F246;
+}
