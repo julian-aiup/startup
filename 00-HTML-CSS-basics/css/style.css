@@ -3,20 +3,38 @@
   font-family: Courier;
 }
 
-header {
-  background-color: #F5F442;
+header, footer, aside, nav {
+  background-color: yellow;
+}
+
+header, footer {
   text-align: center;
 }
 
-footer {
-  background-color: #626240;
-  text-align: center;
+.header {
+  font-size: 46px;
 }
 
-aside {
-  background-color: #7727F7;
+.footer {
+  font-size: 10px;
 }
 
-nav {
-  background-color: #25F246;
+.content {
+  font-size: 14px;
+}
+
+.sidebar {
+  font-size: 10px;
+}
+
+.navigation {
+  font-size: 12px;
+}
+
+[class$="r"] {
+  background-color: magenta;
+}
+
+[class*="a"]:not([class$="r"]) {
+  background-color: blue;
 }
