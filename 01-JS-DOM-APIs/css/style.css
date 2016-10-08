@@ -1,6 +1,6 @@
 /*--- BOX PROPERTIES ---*/
 .hidden {
-  visibility: hidden;
+  opacity: 0;
 }
 
 /*--- BOX BORDERS ---*/
