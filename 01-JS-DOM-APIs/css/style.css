@@ -1,5 +1,7 @@
 /*--- BOX PROPERTIES ---*/
-
+.hidden {
+  visibility: hidden;
+}
 
 /*--- BOX BORDERS ---*/
 
