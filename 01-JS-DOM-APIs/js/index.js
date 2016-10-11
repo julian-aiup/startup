@@ -8,17 +8,19 @@ function fade() {
 document.getElementById("button-joke").addEventListener("click", function() {
   var config = {};
   config.method = "GET";
-  config.url = "http://api.icndb.com/jokes/random";
+  config.url = "https://api.github.com/search/repositories";
   config.async = true;
+  config.params = { q: "JavaScript" };
   // We define what to do when the promise is resolved/fulfilled with the then() call,
   // and the catch() method defines what to do if the promise is rejected.
   performAJAXCall(config).then(
     function(val) {
       val = JSON.parse(val);
-      var node = document.createElement("p");
-      var textNode = document.createTextNode(val.value.joke);
-      node.appendChild(textNode);
-      document.getElementById("fade-in").appendChild(node);
+      console.log(val);
+      // var node = document.createElement("p");
+      // var textNode = document.createTextNode(val.value.joke);
+      // node.appendChild(textNode);
+      // document.getElementById("fade-in").appendChild(node);
     })
   .catch(
     // Log the rejection reason
@@ -34,14 +36,14 @@ document.getElementById("button-joke").addEventListener("click", function() {
 
 function performAJAXCall(config) {
   return new Promise(function (resolve, reject) {
+    var uri = getURI(config["url"], config["params"]);
     var xhr = new XMLHttpRequest();
-    xhr.open(config["method"], config["url"], config["async"]);
-
+    xhr.open(config["method"], uri, config["async"]);
     xhr.onload = function() {
       if (this.status >= 200 && this.status < 300) {
         resolve(xhr.response);
       } else {
-        reject("Service not available");
+        reject("Service not available: " + xhr.statusText);
       }
     };
 
@@ -51,4 +53,21 @@ function performAJAXCall(config) {
 
     xhr.send();
   });
+}
+
+function getURI(url, args) {
+  var uri = url;
+  if (args) {
+    uri += '?';
+    var argcount = 0;
+    for (var key in args) {
+      if (args.hasOwnProperty(key)) {
+        if (argcount++) {
+          uri += '&';
+        }
+        uri += encodeURIComponent(key) + '=' + encodeURIComponent(args[key]);
+      }
+    }
+  }
+  return uri;
 }
