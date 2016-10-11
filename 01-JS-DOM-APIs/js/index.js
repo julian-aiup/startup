@@ -25,10 +25,10 @@ document.getElementById("button-joke").addEventListener("click", function() {
     function(reason) {
       document.getElementById("fade-in").style.color = "red";
       var node = document.createElement("p");
-      var textNode = document.createTextNode(reason.status);
+      var textNode = document.createTextNode("Error: " + reason);
       node.appendChild(textNode);
       document.getElementById("fade-in").appendChild(node);
-      console.log('Handle rejected promise ('+reason.statusText+') here.');
+      console.log("Error: " + reason);
     });
 });
 
@@ -41,18 +41,12 @@ function performAJAXCall(config) {
       if (this.status >= 200 && this.status < 300) {
         resolve(xhr.response);
       } else {
-        reject({
-          status: this.statusText,
-          statusText: xhr.statusText
-        });
+        reject("Service not available");
       }
     };
 
     xhr.onerror = function () {
-      reject({
-        status: this.statusText,
-        statusText: xhr.statusText
-      });
+      reject("Network failure");
     };
 
     xhr.send();
