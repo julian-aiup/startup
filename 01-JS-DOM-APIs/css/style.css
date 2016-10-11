@@ -1,4 +1,8 @@
 /*--- BOX PROPERTIES ---*/
+button {
+  margin-left: 45%;
+}
+
 .hidden {
   opacity: 0;
 }
