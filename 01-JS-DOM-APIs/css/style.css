@@ -1,14 +1,18 @@
 /*--- BOX PROPERTIES ---*/
-button {
-  margin-left: 45%;
-}
-
 .hidden {
   opacity: 0;
 }
 
-#repositories-list {
-  margin-left: 70%;
+.results {
+  position: absolute;
+  left: 70%;
+  top: 10%;
+}
+
+.search {
+  position: absolute;
+  left: 20%;
+  top: 40%;
 }
 
 /*--- BOX BORDERS ---*/
@@ -18,10 +22,14 @@ button {
 
 
 /*--- TEXT PROPERTIES ---*/
-section {
-  text-align: center;
-}
-
 #repositories-list {
   text-align: left;
+}
+
+#search-status {
+  color: red;
+}
+
+section {
+  text-align: center;
 }

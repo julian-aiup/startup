@@ -1,40 +1,40 @@
 function fade() {
   setTimeout(function () {
-    document.getElementById("fade-in").style.transition = "all 4s ease-out";
+    document.getElementById("fade-in").style.transition = "all 3s ease-out";
     document.getElementById("fade-in").style.opacity = 1;
-  }, 3000);
+  }, 2000);
 }
 
 document.getElementById("button-get-repositories").addEventListener("click", function() {
-  document.getElementById("status").innerHTML = "";
-  document.getElementById("repositories-list").innerHTML = "";
-  var config = {};
-  config.method = "GET";
-  config.url = "https://api.github.com/search/repositories";
-  config.async = true;
-  config.params = { q: "JavaScript" };
-  // We define what to do when the promise is resolved/fulfilled with the then() call,
-  // and the catch() method defines what to do if the promise is rejected.
-  performAJAXCall(config).then(
-    function(val) {
-      val = JSON.parse(val);
-      for(var key in val.items) {
-        var node = document.createElement("li");
-        var textNode = document.createTextNode(val.items[key].full_name);
+  var keyword = document.getElementById("keyword-repositories").value;
+  if (keyword !== "") {
+    clearElements();
+    var config = getConfig("GET", "https://api.github.com/search/repositories", true, { q: keyword });
+    // We define what to do when the promise is resolved/fulfilled with the then() call,
+    // and the catch() method defines what to do if the promise is rejected.
+    performAJAXCall(config).then(
+      function(val) {
+        val = JSON.parse(val);
+        for(var key in val.items) {
+          var node = document.createElement("li");
+          var textNode = document.createTextNode(val.items[key].full_name);
+          node.appendChild(textNode);
+          document.getElementById("repositories-list").appendChild(node);
+        }
+      })
+    .catch(
+      // Log the rejection reason
+      function(reason) {
+        document.getElementById("fade-in").style.color = "red";
+        var node = document.createElement("p");
+        var textNode = document.createTextNode("Error: " + reason);
         node.appendChild(textNode);
-        document.getElementById("repositories-list").appendChild(node);
-      }
-    })
-  .catch(
-    // Log the rejection reason
-    function(reason) {
-      document.getElementById("fade-in").style.color = "red";
-      var node = document.createElement("p");
-      var textNode = document.createTextNode("Error: " + reason);
-      node.appendChild(textNode);
-      document.getElementById("fade-in").appendChild(node);
-      console.log("Error: " + reason);
-    });
+        document.getElementById("fade-in").appendChild(node);
+        console.log("Error: " + reason);
+      });
+  } else {
+    document.getElementById("search-status").innerHTML = "Please enter a keyword.";
+  }
 });
 
 function performAJAXCall(config) {
@@ -73,4 +73,19 @@ function getURI(url, args) {
     }
   }
   return uri;
+}
+
+function clearElements() {
+  document.getElementById("status").innerHTML = "";
+  document.getElementById("repositories-list").innerHTML = "";
+  document.getElementById("search-status").innerHTML = "";
+}
+
+function getConfig(method, url, asynchronous, params) {
+  return config = {
+    "method": method,
+    "url": url,
+    "asynchronous": asynchronous,
+    "params": params
+  }
 }
