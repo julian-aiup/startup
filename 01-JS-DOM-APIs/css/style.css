@@ -7,6 +7,10 @@ button {
   opacity: 0;
 }
 
+#repositories-list {
+  margin-left: 70%;
+}
+
 /*--- BOX BORDERS ---*/
 
 
@@ -16,4 +20,8 @@ button {
 /*--- TEXT PROPERTIES ---*/
 section {
   text-align: center;
+}
+
+#repositories-list {
+  text-align: left;
 }

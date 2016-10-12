@@ -5,7 +5,9 @@ function fade() {
   }, 3000);
 }
 
-document.getElementById("button-joke").addEventListener("click", function() {
+document.getElementById("button-get-repositories").addEventListener("click", function() {
+  document.getElementById("status").innerHTML = "";
+  document.getElementById("repositories-list").innerHTML = "";
   var config = {};
   config.method = "GET";
   config.url = "https://api.github.com/search/repositories";
@@ -16,11 +18,12 @@ document.getElementById("button-joke").addEventListener("click", function() {
   performAJAXCall(config).then(
     function(val) {
       val = JSON.parse(val);
-      console.log(val);
-      // var node = document.createElement("p");
-      // var textNode = document.createTextNode(val.value.joke);
-      // node.appendChild(textNode);
-      // document.getElementById("fade-in").appendChild(node);
+      for(var key in val.items) {
+        var node = document.createElement("li");
+        var textNode = document.createTextNode(val.items[key].full_name);
+        node.appendChild(textNode);
+        document.getElementById("repositories-list").appendChild(node);
+      }
     })
   .catch(
     // Log the rejection reason
