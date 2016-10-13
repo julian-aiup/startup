@@ -15,6 +15,12 @@
   top: 40%;
 }
 
+#search-status {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: -70px;
+}
+
 /*--- BOX BORDERS ---*/
 
 
@@ -32,4 +38,10 @@
 
 section {
   text-align: center;
+}
+
+/*--- TRANSITIONS ---*/
+.fade-in {
+  transition: all 3s ease-out;
+  opacity: 1;
 }
