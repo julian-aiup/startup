@@ -28,12 +28,11 @@ class EventEmitter {
     this.events: [];
   }
 
+// CORRECT FIND -> PUT FUNCTION FOR PARAMETER
   on(event, listener) {
-    let eventIndex = this.events.indexOf(event);
-    let eventFound;
+    let eventFound = this.events.find(event);
     let eventListenersLength;
-    if (eventIndex) {
-      eventFound = this.events[eventIndex];
+    if (eventFound) {
       eventFound.push(listener);
     } else {
       eventListenersLength = this.events.push(event);
@@ -46,7 +45,16 @@ class EventEmitter {
   }
 
   off(event, listener) {
-
+    let eventFound = this.events.find(event);
+    if (eventFound) {
+      eventFound = eventFound.filter(
+        function(item) {
+          if (item !== listener) {
+            return item;
+          }
+        }
+      );
+    }
   }
 }
 
