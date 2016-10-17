@@ -5,25 +5,29 @@ function fade() {
 }
 
 document.getElementById("button-get-repositories").addEventListener("click", function() {
-  var keyword = document.getElementById("keyword-repositories").value;
+  let keyword = document.getElementById("keyword-repositories").value;
+  let config;
+  let node;
+  let textNode;
+  let repositoriesList;
+  let key;
+  let fadein;
   if (keyword !== "") {
     clearElements();
-    var config = {
+    config = {
       "method": "GET",
       "url": "https://api.github.com/search/repositories",
       "asynchronous": true,
       "params": { "q": keyword }
-    }
+    };
     // We define what to do when the promise is resolved/fulfilled with the then() call,
     // and the catch() method defines what to do if the promise is rejected.
     performAJAXCall(config).then(
       function(value) {
+        repositoriesList = document.getElementById("repositories-list");
         value = JSON.parse(value);
-        var node;
-        var repositoriesList = document.getElementById("repositories-list");
-        var textNode;
 
-        for(var key in value.items) {
+        for(key in value.items) {
           node = document.createElement("li");
           textNode = document.createTextNode(value.items[key].full_name);
           node.appendChild(textNode);
@@ -33,11 +37,12 @@ document.getElementById("button-get-repositories").addEventListener("click", fun
     .catch(
       // Log the rejection reason
       function(reason) {
-        document.getElementById("fade-in").style.color = "red";
-        var node = document.createElement("p");
-        var textNode = document.createTextNode("Error: " + reason);
+        fadein = document.getElementById("fade-in");
+        fadein.style.color = "red"
+        node = document.createElement("p");
+        textNode = document.createTextNode("Error: " + reason);
         node.appendChild(textNode);
-        document.getElementById("fade-in").appendChild(node);
+        fadein.appendChild(node);
         console.log("Error: " + reason);
       });
   } else {
@@ -46,9 +51,11 @@ document.getElementById("button-get-repositories").addEventListener("click", fun
 });
 
 function performAJAXCall(config) {
+  let uri;
+  let xhr;
   return new Promise(function (resolve, reject) {
-    var uri = getURI(config.url, config.params);
-    var xhr = new XMLHttpRequest();
+    uri = getURI(config.url, config.params);
+    xhr = new XMLHttpRequest();
     xhr.open(config.method, uri, config.async);
     xhr.onload = function() {
       if (this.status >= 200 && this.status < 300) {
@@ -67,11 +74,13 @@ function performAJAXCall(config) {
 }
 
 function getURI(url, args) {
-  var uri = url;
+  let uri = url;
+  let argcount;
+  let key;
   if (args) {
     uri += '?';
-    var argcount = 0;
-    for (var key in args) {
+    argcount = 0;
+    for (key in args) {
       if (args.hasOwnProperty(key)) {
         if (argcount++) {
           uri += '&';
