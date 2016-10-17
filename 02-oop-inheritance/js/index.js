@@ -1,30 +1,3 @@
-class Movie {
-  constructor(title, year, duration) {
-    this.title = title;
-    this.year = year;
-    this.duration = duration;
-  }
-
-  play() { }
-
-  pause() { }
-
-  resume() { }
-}
-
-//---TESTING MOVIE CLASS---
-let inception = new Movie("Inception", 2010, 148);
-let terminator = new Movie('Terminator', 1984, 90);
-console.log(inception instanceof Movie);
-console.log(inception instanceof Object);
-
-console.log(typeof Movie);
-console.log(typeof Movie.prototype.play);
-
-console.log(inception.title);
-console.log(terminator.title);
-//---  ---
-
 class EventEmitter {
   constructor() {
     this.events = [];
@@ -89,4 +62,38 @@ setTimeout(function() {
   eventEmitter.emit("exampleEvent");
   eventEmitter.off("exampleEvent", hello);
 }, 3000);
+//---  ---
+
+class Movie extends EventEmitter {
+  constructor(title, year, duration) {
+    super();
+    this.title = title;
+    this.year = year;
+    this.duration = duration;
+  }
+
+  play() {
+    emit("play");
+  }
+
+  pause() {
+    emit("pause");
+  }
+
+  resume() {
+    emit("resume");
+  }
+}
+
+//---TESTING MOVIE CLASS---
+let inception = new Movie("Inception", 2010, 148);
+let terminator = new Movie('Terminator', 1984, 90);
+console.log(inception instanceof Movie);
+console.log(inception instanceof Object);
+
+console.log(typeof Movie);
+console.log(typeof Movie.prototype.play);
+
+console.log(inception.title);
+console.log(terminator.title);
 //---  ---
