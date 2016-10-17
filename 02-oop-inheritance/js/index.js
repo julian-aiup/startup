@@ -12,6 +12,7 @@ class Movie {
   resume() { }
 }
 
+//---TESTING MOVIE CLASS---
 let inception = new Movie("Inception", 2010, 148);
 let terminator = new Movie('Terminator', 1984, 90);
 console.log(inception instanceof Movie);
@@ -22,48 +23,70 @@ console.log(typeof Movie.prototype.play);
 
 console.log(inception.title);
 console.log(terminator.title);
+//---  ---
 
 class EventEmitter {
   constructor() {
-    this.events: [];
+    this.events = [];
   }
 
-// CORRECT FIND -> PUT FUNCTION FOR PARAMETER
   on(event, listener) {
-    let eventFound = this.events.find(event);
+    let eventFound = this.events.find(function(element) {
+      if (event === element.name) return element;
+    });
     let eventListenersLength;
     if (eventFound) {
-      eventFound.push(listener);
+      eventFound.listeners.push(listener);
     } else {
-      eventListenersLength = this.events.push(event);
-      this.events[eventListenersLength - 1].push(listener);
+      eventListenersLength = this.events.push({ name: event, listeners: [] });
+      this.events[eventListenersLength - 1].listeners.push(listener);
     }
   }
 
   emit(event) {
-
+    let eventFound = this.events.find(function(element) {
+      if (event === element.name) return element;
+    });
+    eventFound.listeners.map(function(listener) {
+      listener.call();
+    });
   }
 
   off(event, listener) {
-    let eventFound = this.events.find(event);
+    let eventFound = this.events.find(function(element) {
+      if (event === element.name) {
+        return element;
+      }
+    });
+    let listeners;
     if (eventFound) {
-      eventFound = eventFound.filter(
-        function(item) {
-          if (item !== listener) {
+      listeners = eventFound.listeners;
+      listeners = eventFound.listeners.filter(function(item) {
+        if (item !== listener) {
+          return item;
+        }
+      });
+      if (!listeners.length) {
+        this.events = this.events.filter(function(item) {
+          if (eventFound !== item) {
             return item;
           }
-        }
-      );
+        });
+      }
     }
   }
 }
 
-let eventEmitter = new EventEmitter();
-eventEmitter.on("click", function() {
-  alert("hello");
-});
+//---TESTING EVENTEMITTER CLASS---
+function hello() {
+  alert("Hello");
+}
 
-// Create an EventEmitter class with the following methods: on, emit, off.
-// The on method will allow to pass a callback or listener that will be executed each time a given event is triggered.
-// The emit method will allow a class to trigger events to be consumed by other functions/objects.
-// The off method will delete the listener.
+let eventEmitter = new EventEmitter();
+eventEmitter.on("exampleEvent", hello);
+
+setTimeout(function() {
+  eventEmitter.emit("exampleEvent");
+  eventEmitter.off("exampleEvent", hello);
+}, 3000);
+//---  ---
