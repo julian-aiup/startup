@@ -105,7 +105,14 @@ let social = {
   }
 }
 
-//---TESTING MOVIE CLASS---
+class Actor {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+//---TESTING MOVIE, LOGGER, SOCIAL, ACTOR---
 let terminator = new Movie('Terminator', 1984, 90);
 let logger = new Logger();
 Object.assign(terminator, social);
@@ -115,4 +122,11 @@ setTimeout(function() {
 }, 5000);
 terminator.share("Mike Blossom");
 terminator.like("Robert");
+
+let arnold = new Actor('Arnold Schwarzenegger', 50);
+let otherCast = [
+ new Actor('Paul Winfield', 50),
+ new Actor('Michael Biehn', 50),
+ new Actor('Linda Hamilton', 50)
+];
 //---  ---
