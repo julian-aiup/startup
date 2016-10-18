@@ -21,7 +21,7 @@ class EventEmitter {
       if (event === element.name) return element;
     });
     eventFound.listeners.map(function(listener) {
-      listener.call();
+      listener(event);
     });
   }
 
@@ -64,6 +64,16 @@ setTimeout(function() {
 }, 3000);
 //---  ---
 
+class Logger {
+  constructor() {
+
+  }
+
+  log(info) {
+    console.log("The '" + info + "' event has been emmited");
+  }
+}
+
 class Movie extends EventEmitter {
   constructor(title, year, duration) {
     super();
@@ -73,27 +83,36 @@ class Movie extends EventEmitter {
   }
 
   play() {
-    emit("play");
+    this.emit("play");
   }
 
   pause() {
-    emit("pause");
+    this.emit("pause");
   }
 
   resume() {
-    emit("resume");
+    this.emit("resume");
+  }
+}
+
+let social = {
+  share: function (friendName) {
+    console.log(`${friendName} share ${this.title}`);
+  },
+
+  like: function (friendName) {
+    console.log(`${friendName} likes ${this.title}`);
   }
 }
 
 //---TESTING MOVIE CLASS---
-let inception = new Movie("Inception", 2010, 148);
 let terminator = new Movie('Terminator', 1984, 90);
-console.log(inception instanceof Movie);
-console.log(inception instanceof Object);
-
-console.log(typeof Movie);
-console.log(typeof Movie.prototype.play);
-
-console.log(inception.title);
-console.log(terminator.title);
+let logger = new Logger();
+Object.assign(terminator, social);
+terminator.on("play", logger.log);
+setTimeout(function() {
+  terminator.play();
+}, 5000);
+terminator.share("Mike Blossom");
+terminator.like("Robert");
 //---  ---
