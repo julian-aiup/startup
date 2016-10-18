@@ -50,20 +50,6 @@ class EventEmitter {
   }
 }
 
-//---TESTING EVENTEMITTER CLASS---
-function hello() {
-  alert("Hello");
-}
-
-let eventEmitter = new EventEmitter();
-eventEmitter.on("exampleEvent", hello);
-
-setTimeout(function() {
-  eventEmitter.emit("exampleEvent");
-  eventEmitter.off("exampleEvent", hello);
-}, 3000);
-//---  ---
-
 class Logger {
   constructor() {
 
@@ -80,6 +66,7 @@ class Movie extends EventEmitter {
     this.title = title;
     this.year = year;
     this.duration = duration;
+    this.cast = [];
   }
 
   play() {
@@ -92,6 +79,10 @@ class Movie extends EventEmitter {
 
   resume() {
     this.emit("resume");
+  }
+
+  addCast(actors) {
+    this.cast = this.cast.concat(actors);
   }
 }
 
@@ -112,6 +103,20 @@ class Actor {
   }
 }
 
+//---TESTING EVENTEMITTER CLASS---
+function hello() {
+  alert("Hello");
+}
+
+let eventEmitter = new EventEmitter();
+eventEmitter.on("exampleEvent", hello);
+
+setTimeout(function() {
+  eventEmitter.emit("exampleEvent");
+  eventEmitter.off("exampleEvent", hello);
+}, 3000);
+//---  ---
+
 //---TESTING MOVIE, LOGGER, SOCIAL, ACTOR---
 let terminator = new Movie('Terminator', 1984, 90);
 let logger = new Logger();
@@ -129,4 +134,7 @@ let otherCast = [
  new Actor('Michael Biehn', 50),
  new Actor('Linda Hamilton', 50)
 ];
+
+terminator.addCast(arnold);
+terminator.addCast(otherCast);
 //---  ---
