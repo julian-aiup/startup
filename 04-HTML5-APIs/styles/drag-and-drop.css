@@ -1,0 +1,29 @@
+/*--- BOX PROPERTIES ---*/
+.drop {
+  left: 5px;
+  min-height: 100px;
+  position: absolute;
+  width: 48%;
+}
+
+.output {
+  height: auto;
+  min-height: 100px;
+  position: absolute;
+  right: 5px;
+  width: 48%;
+}
+
+.section {
+  position: relative;
+}
+/*--- BOX BORDERS ---*/
+.drop {
+  border: 1px solid black;
+}
+
+/*--- BACKGROUND PROPERTIES ---*/
+
+/*--- TEXT PROPERTIES ---*/
+
+/*--- TRANSITIONS ---*/
