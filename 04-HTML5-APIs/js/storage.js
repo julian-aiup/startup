@@ -6,7 +6,7 @@ document.getElementById("save").addEventListener("click", function() {
   localStorage.setItem("comment", receivedComment);
   console.log("Comment localStorage: " + localStorage["comment"]);
 
-  // Testing IndexedDB
+  // Testing indexedDB
   // Open or create DB
   let indexedDB = window.indexedDB;
   let open = indexedDB.open("test", 1);
@@ -37,6 +37,35 @@ document.getElementById("save").addEventListener("click", function() {
       // Close the db when the transaction is done
       tx.oncomplete = function() {
           db.close();
+      };
+  }
+});
+
+document.getElementById("clear").addEventListener("click", function() {
+  // localStorage
+  localStorage.removeItem("comment");
+  console.log("Comment localStorage: " + localStorage["comment"]);
+
+  // indexedDB
+  // Open or create DB
+  let indexedDB = window.indexedDB;
+  let open = indexedDB.open("test", 1);
+
+  open.onsuccess = function() {
+      // Start a new transaction
+      let db = open.result;
+      let tx = db.transaction("comments", "readwrite");
+      let store = tx.objectStore("comments");
+
+      var objectStoreRequest = store.delete(1);
+
+      objectStoreRequest.onsuccess = function(event) {
+        console.log("Comment deleted");
+      };
+
+      // Close the db when the transaction is done
+      tx.oncomplete = function() {
+        db.close();
       };
   }
 });
