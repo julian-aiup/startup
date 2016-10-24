@@ -1,0 +1,27 @@
+/*--- BOX PROPERTIES ---*/
+
+/*--- BOX BORDERS ---*/
+
+/*--- BACKGROUND PROPERTIES ---*/
+
+/*--- TEXT PROPERTIES ---*/
+
+/*--- TRANSITIONS ---*/
+
+/*--- SVG ---*/
+rect {
+  x: 10;
+  y: 10;
+  height: 100px;
+  width: 100px;
+  stroke: #2A1;
+  fill: #468;
+}
+
+circle {
+  cx: 200;
+  cy: 40;
+  r: 24;
+  stroke: #A1F;
+  fill: #F28;
+}
