@@ -1,28 +1,32 @@
 // Testing storage methods
+const commentItem = "comment";
+const commentDataBase = "commentDataBase";
+const commentTable = "comment";
+
 document.getElementById("save").addEventListener("click", function() {
   let receivedComment = document.getElementById("comment").value;
 
   // Testing localStorage
-  localStorage.setItem("comment", receivedComment);
-  console.log("Comment localStorage: " + localStorage["comment"]);
+  localStorage.setItem(commentItem, receivedComment);
+  console.log("Comment localStorage: " + localStorage[commentItem]);
 
   // Testing indexedDB
   // Open or create DB
   let indexedDB = window.indexedDB;
-  let open = indexedDB.open("test", 1);
+  let open = indexedDB.open(commentDataBase);
 
   // Create the schema
   open.onupgradeneeded = function() {
     let db = open.result;
-    let store = db.createObjectStore("comments", {keyPath: "id"});
+    let store = db.createObjectStore(commentTable, {keyPath: "id"});
     let index = store.createIndex("commentIndex", "comment");
   };
 
   open.onsuccess = function() {
       // Start a new transaction
       let db = open.result;
-      let tx = db.transaction("comments", "readwrite");
-      let store = tx.objectStore("comments");
+      let tx = db.transaction(commentTable, "readwrite");
+      let store = tx.objectStore(commentTable);
       let index = store.index("commentIndex");
 
       // Add some data
@@ -43,19 +47,19 @@ document.getElementById("save").addEventListener("click", function() {
 
 document.getElementById("clear").addEventListener("click", function() {
   // localStorage
-  localStorage.removeItem("comment");
-  console.log("Comment localStorage: " + localStorage["comment"]);
+  localStorage.removeItem(commentItem);
+  console.log("Comment localStorage: " + localStorage[commentItem]);
 
   // indexedDB
   // Open or create DB
   let indexedDB = window.indexedDB;
-  let open = indexedDB.open("test", 1);
+  let open = indexedDB.open(commentDataBase);
 
   open.onsuccess = function() {
       // Start a new transaction
       let db = open.result;
-      let tx = db.transaction("comments", "readwrite");
-      let store = tx.objectStore("comments");
+      let tx = db.transaction(commentTable, "readwrite");
+      let store = tx.objectStore(commentTable);
 
       var objectStoreRequest = store.delete(1);
 
