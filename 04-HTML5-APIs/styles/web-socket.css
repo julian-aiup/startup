@@ -5,5 +5,12 @@
 /*--- BACKGROUND PROPERTIES ---*/
 
 /*--- TEXT PROPERTIES ---*/
+.web-socket-error {
+  color: red;
+}
+
+.web-socket-message {
+  color: blue;
+}
 
 /*--- TRANSITIONS ---*/

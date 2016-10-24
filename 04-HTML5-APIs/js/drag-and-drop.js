@@ -1,7 +1,7 @@
 let drop = document.getElementById("drop");
 
 drop.ondragenter = function(event) {
-  document.getElementById("drop").textContent = '';
+  drop.textContent = '';
   event.stopPropagation();
   event.preventDefault();
 }

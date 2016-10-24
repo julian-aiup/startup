@@ -27,11 +27,11 @@ function onClose(evt) {
 }
 
 function onMessage(evt) {
-  writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>');
+  writeToScreen("RESPONSE: " + evt.data, "web-socket-message");
 }
 
 function onError(evt) {
-  writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+  writeToScreen("ERROR: " + evt.data, "web-socket-error");
 }
 
 function doSend(message) {
@@ -39,11 +39,13 @@ function doSend(message) {
   websocket.send(message);
 }
 
-function writeToScreen(message) {
-  let pre = document.createElement("p");
-  pre.style.wordWrap = "break-word";
-  pre.innerHTML = message;
-  output.appendChild(pre);
+function writeToScreen(message, cssClass) {
+  let paragraphMessage = document.createElement("p");
+  if(cssClass) {
+    paragraphMessage.classList.add(cssClass);
+  }
+  paragraphMessage.innerHTML = message;
+  output.appendChild(paragraphMessage);
 }
 
 document.getElementById("send").addEventListener("click", function() {
