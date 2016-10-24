@@ -1,0 +1,27 @@
+/*--- BOX PROPERTIES ---*/
+button {
+  height: 50px;
+  position: absolute;
+  right: 30%;
+  top: 30%;
+  width: 70px;
+}
+
+canvas {
+  height: 400px;
+  left: 0px;
+  position: absolute;
+  width: 400px;
+}
+
+/*--- BOX BORDERS ---*/
+canvas {
+  border-style: dotted;
+  border-width: 1px;
+}
+
+/*--- BACKGROUND PROPERTIES ---*/
+
+/*--- TEXT PROPERTIES ---*/
+
+/*--- TRANSITIONS ---*/
