@@ -1,0 +1,44 @@
+/*--- BOX PROPERTIES ---*/
+#movie-button {
+  left: 30px;
+  position: absolute;
+  top: 170px;
+}
+
+#movie-duration {
+  left: 30px;
+  position: absolute;
+  top: 130px;
+}
+
+#movie-duration-input {
+  margin-left: 20px;
+}
+
+#movie-title {
+  left: 30px;
+  position: absolute;
+  top: 70px;
+}
+
+#movie-title-input {
+  margin-left: 20px;
+}
+
+#movie-year {
+  left: 30px;
+  position: absolute;
+  top: 100px;
+}
+
+#movie-year-input {
+  margin-left: 20px;
+}
+
+/*--- BOX BORDERS ---*/
+
+/*--- BACKGROUND PROPERTIES ---*/
+
+/*--- TEXT PROPERTIES ---*/
+
+/*--- TRANSITIONS ---*/
