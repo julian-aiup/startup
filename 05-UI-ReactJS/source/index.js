@@ -13,7 +13,7 @@ class Movie {
   }
 }
 
-class TodoApp extends React.Component {
+class MovieCreate extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,16 +43,16 @@ class TodoApp extends React.Component {
     );
   }
 
-  handleChange(name) {
+  handleChange(key) {
     return function(event) {
-      var state = {};
-      state[name] = event.target.value;
+      let state = {};
+      state[key] = event.target.value;
       this.setState(state);
     }.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     let newMovie = new Movie(this.state.title, this.state.year, this.state.duration);
     this.setState((prevState) => ({
       title: '',
@@ -63,4 +63,4 @@ class TodoApp extends React.Component {
   }
 }
 
-ReactDOM.render(<TodoApp />, document.getElementById('app'));
+ReactDOM.render(<MovieCreate />, document.getElementById('app'));
