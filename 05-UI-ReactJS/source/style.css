@@ -15,6 +15,12 @@
   margin-left: 20px;
 }
 
+.movies-table {
+  left: 30px;
+  position: absolute;
+  top: 210px;
+}
+
 #movie-title {
   left: 30px;
   position: absolute;
@@ -35,10 +41,19 @@
   margin-left: 20px;
 }
 
+.no-movies {
+  left: 30px;
+  position: absolute;
+  top: 210px;
+}
+
 /*--- BOX BORDERS ---*/
 
 /*--- BACKGROUND PROPERTIES ---*/
 
 /*--- TEXT PROPERTIES ---*/
+.no-movies {
+  color: red;
+}
 
 /*--- TRANSITIONS ---*/
