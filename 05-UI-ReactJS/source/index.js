@@ -61,7 +61,16 @@ class MovieApp extends React.Component {
   }
 
   handleDelete(movie) {
-
+    let filteredMovies = this.state.movies.filter(function(arrayMovie) {
+      if (arrayMovie !== movie) {
+        return arrayMovie;
+      }
+    });
+    this.setState({
+        movies: filteredMovies
+      },
+        () => { localStorage.setItem("movies", JSON.stringify(this.state.movies)) }
+    );
   }
 
   handleReset() {
