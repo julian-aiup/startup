@@ -1,6 +1,18 @@
 /*--- BOX PROPERTIES ---*/
-#movie-button {
+#mode {
   left: 30px;
+  position: absolute;
+  top: 25px;
+}
+
+#movie-button-save {
+  left: 30px;
+  position: absolute;
+  top: 170px;
+}
+
+#movie-button-reset {
+  left: 140px;
   position: absolute;
   top: 170px;
 }
@@ -52,6 +64,10 @@
 /*--- BACKGROUND PROPERTIES ---*/
 
 /*--- TEXT PROPERTIES ---*/
+#mode {
+  color: blue;
+}
+
 .no-movies {
   color: red;
 }

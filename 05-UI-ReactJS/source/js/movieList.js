@@ -13,6 +13,8 @@ class MovieList extends React.Component {
               <th>Title</th>
               <th>Year</th>
               <th>Duration</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -21,6 +23,8 @@ class MovieList extends React.Component {
                 <th>{movie.title}</th>
                 <th>{movie.year}</th>
                 <th>{movie.duration}</th>
+                <th><button onClick={() => { this.props.onEdit(movie) }}>Edit</button></th>
+                <th><button onClick={() => { this.props.onDelete(movie) }}>Delete</button></th>
               </tr>
             ))}
           </tbody>
