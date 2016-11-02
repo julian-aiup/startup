@@ -15,6 +15,7 @@ class MovieApp extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.storeMovies = this.storeMovies.bind(this);
   }
 
   render() {
@@ -37,20 +38,22 @@ class MovieApp extends React.Component {
   handleUserInput(movie) {
     let movies = this.state.movies;
     let editMovie;
-    if(!this.state.selectedMovie.id) {
+    if(!movie.id) {
+      // Create movie
       movie["id"] = Date.now();
       movies = movies.concat(movie);
     } else {
+      // Edit movie
       editMovie = movies.find(function(arrayMovie) {
         return arrayMovie.id === movie.id;
       });
       Object.assign(editMovie, movie);
+      this.handleReset();
     }
     this.setState({
-        movies: movies,
-        selectedMovie: new Movie()
+        movies: movies
       },
-        () => { localStorage.setItem("movies", JSON.stringify(this.state.movies)) }
+        this.storeMovies
     );
   }
 
@@ -69,7 +72,7 @@ class MovieApp extends React.Component {
     this.setState({
         movies: filteredMovies
       },
-        () => { localStorage.setItem("movies", JSON.stringify(this.state.movies)) }
+        this.storeMovies
     );
   }
 
@@ -77,6 +80,10 @@ class MovieApp extends React.Component {
     this.setState({
       selectedMovie: new Movie()
     });
+  }
+
+  storeMovies() {
+    localStorage.setItem("movies", JSON.stringify(this.state.movies));
   }
 }
 

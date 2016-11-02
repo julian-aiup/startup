@@ -1,0 +1,24 @@
+/*--- movieList.css ---*/
+/*--- BOX PROPERTIES ---*/
+.movies-table {
+  left: 30px;
+  position: absolute;
+  top: 210px;
+}
+
+.no-movies {
+  left: 30px;
+  position: absolute;
+  top: 210px;
+}
+
+/*--- BOX BORDERS ---*/
+
+/*--- BACKGROUND PROPERTIES ---*/
+
+/*--- TEXT PROPERTIES ---*/
+.no-movies {
+  color: red;
+}
+
+/*--- TRANSITIONS ---*/
