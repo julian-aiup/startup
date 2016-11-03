@@ -1,7 +1,7 @@
-import React from 'react';
-import {Movie} from './movie.js';
+import React from "react";
+import Movie from "./movie.js";
 
-class MovieForm extends React.Component {
+export default class MovieForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -10,12 +10,24 @@ class MovieForm extends React.Component {
       movie: new Movie()
     };
   }
-
+/*
+  componentDidMount() {
+    if(this.props.params) {
+      let movie = JSON.parse(localStorage["movies"]).find((element) => {
+        return this.props.params.movieId === element.id;
+      });
+      this.setState({
+        // route components are rendered with useful information, like URL params
+        movie: movie
+      });
+    }
+  }
+*/
   render() {
     let mode;
     this.state.movie.id ? mode = "editing" : mode = "creating";
     return (
-      <div>
+      <div className="movie-form">
         <h3>Movie</h3>
         <h5 className="mode">You are {mode} a movie.</h5>
         <form onSubmit={this.handleSubmit}>
@@ -52,7 +64,9 @@ class MovieForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onUserInput(this.state.movie);
+    if(this.props.onUserInput) {
+      this.props.onUserInput(this.state.movie);
+    }
     this.handleReset();
   }
 
@@ -65,5 +79,3 @@ class MovieForm extends React.Component {
     });
   }
 }
-
-export {MovieForm}

@@ -1,6 +1,8 @@
 /*--- style.css ---*/
 /*--- BOX PROPERTIES ---*/
-
+.app {
+  position: absolute;
+}
 /*--- BOX BORDERS ---*/
 
 /*--- BACKGROUND PROPERTIES ---*/

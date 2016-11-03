@@ -1,15 +1,12 @@
 /*--- movieList.css ---*/
 /*--- BOX PROPERTIES ---*/
 .movies-table {
-  left: 30px;
-  position: absolute;
-  top: 210px;
+  position: relative;
 }
 
 .no-movies {
   left: 30px;
-  position: absolute;
-  top: 210px;
+  position: relative;
 }
 
 /*--- BOX BORDERS ---*/
