@@ -10,11 +10,13 @@ export default class MovieForm extends React.Component {
       movie: new Movie()
     };
   }
-/*
+
   componentDidMount() {
     if(this.props.params) {
       let movie = JSON.parse(localStorage["movies"]).find((element) => {
-        return this.props.params.movieId === element.id;
+        if(this.props.params.movieId === element.id.toString()) {
+          return element;
+        }
       });
       this.setState({
         // route components are rendered with useful information, like URL params
@@ -22,7 +24,7 @@ export default class MovieForm extends React.Component {
       });
     }
   }
-*/
+
   render() {
     let mode;
     this.state.movie.id ? mode = "editing" : mode = "creating";
@@ -31,20 +33,22 @@ export default class MovieForm extends React.Component {
         <h3>Movie</h3>
         <h5 className="mode">You are {mode} a movie.</h5>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="title" className="movie-title">
+          <label htmlFor="title" className="movie-label">
             Title:
-            <input onChange={this.handleChange.bind(this, "title")} value={this.state.movie.title} className="movie-title-input" />
+            <input onChange={this.handleChange.bind(this, "title")} value={this.state.movie.title} className="movie-input" />
           </label>
-          <label htmlFor="year" className="movie-year">
+          <label htmlFor="year" className="movie-label">
             Year:
-            <input onChange={this.handleChange.bind(this, "year")} value={this.state.movie.year} className="movie-year-input" />
+            <input onChange={this.handleChange.bind(this, "year")} value={this.state.movie.year} className="movie-input" />
           </label>
-          <label htmlFor="duration" className="movie-duration">
+          <label htmlFor="duration" className="movie-label">
             Duration:
-            <input onChange={this.handleChange.bind(this, "duration")} value={this.state.movie.duration} className="movie-duration-input" />
+            <input onChange={this.handleChange.bind(this, "duration")} value={this.state.movie.duration} className="movie-input" />
           </label>
-          <button type="submit" className="movie-button-save">Save movie</button>
-          <button type="button" onClick={this.handleReset} className="movie-button-reset">Reset</button>
+          <div className="movie-buttons">
+            <button type="submit" className="movie-button">Save movie</button>
+            <button type="button" onClick={this.handleReset} className="movie-button">Reset</button>
+          </div>
         </form>
       </div>
     );

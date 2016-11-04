@@ -24,6 +24,7 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <Route path="movies" component={MovieApp} />
+      <Route path="movie/:movieId" component={MovieForm} />
     </Route>
   </Router>
 ), document.getElementById('app'));

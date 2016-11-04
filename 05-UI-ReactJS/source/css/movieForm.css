@@ -4,40 +4,27 @@
   position: relative;
 }
 
-.movie-button-save {
-  position: relative;
+.movie-button {
+  margin-left: 10px;
 }
 
-.movie-button-reset {
+.movie-buttons {
+  margin-top: 10px;
   position: relative;
-}
-
-.movie-duration {
-  position: relative;
-}
-
-.movie-duration-input {
-  margin-left: 20px;
 }
 
 .movie-form {
   position: relative;
 }
 
-.movie-title {
-  position: relative;
-}
-
-.movie-title-input {
+.movie-input {
   margin-left: 20px;
 }
 
-.movie-year {
+.movie-label {
+  display: block;
+  margin-top: 10px;
   position: relative;
-}
-
-.movie-year-input {
-  margin-left: 20px;
 }
 
 /*--- BOX BORDERS ---*/

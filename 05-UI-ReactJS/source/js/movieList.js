@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 export default class MovieList extends React.Component {
   render() {
@@ -27,7 +28,7 @@ export default class MovieList extends React.Component {
                   <th>{movie.title}</th>
                   <th>{movie.year}</th>
                   <th>{movie.duration}</th>
-                  <th><button onClick={() => { this.props.onEdit(movie) }}>Edit</button></th>
+                  <th><Link to={`/movie/${movie.id}`}>Edit</Link></th>
                   <th><button onClick={() => { this.props.onDelete(movie) }}>Delete</button></th>
                 </tr>
               ))}
