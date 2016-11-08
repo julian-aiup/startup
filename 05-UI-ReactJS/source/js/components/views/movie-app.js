@@ -1,7 +1,7 @@
 import React from "react";
-import Movie from "./movie.js";
-import MovieList from "./movieList.js";
-import MovieForm from "./movieForm.js";
+import Movie from "../../movie.js";
+import MovieList from "./movie-list.js";
+import MovieForm from "./movie-form.js";
 
 export default class MovieApp extends React.Component {
   constructor(props) {

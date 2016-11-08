@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropTypes } from "react";
 import { Link } from "react-router";
 
 export default class MovieList extends React.Component {
@@ -23,15 +23,16 @@ export default class MovieList extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.movies.map(movie => (
-                <tr key={movie.id}>
-                  <th>{movie.title}</th>
-                  <th>{movie.year}</th>
-                  <th>{movie.duration}</th>
-                  <th><Link to={`/movie/${movie.id}`}>Edit</Link></th>
-                  <th><button onClick={() => { this.props.onDelete(movie) }}>Delete</button></th>
-                </tr>
-              ))}
+              {this.props.movies.map((movie) => {
+                return(
+                  <tr key={movie.id}>
+                    <th>{movie.title}</th>
+                    <th>{movie.year}</th>
+                    <th>{movie.duration}</th>
+                    <th><Link to={`/movie/${movie.id}`}>Edit</Link></th>
+                    <th><button onClick={this.props.onDelete.bind(null, movie.id)}>Delete</button></th>
+                  </tr>
+              )})}
             </tbody>
           </table>
         </div>
@@ -39,3 +40,8 @@ export default class MovieList extends React.Component {
     }
   }
 }
+
+MovieList.propTypes = {
+  movies: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired
+};

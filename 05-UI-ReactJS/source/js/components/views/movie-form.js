@@ -1,5 +1,5 @@
 import React from "react";
-import Movie from "./movie.js";
+import Movie from "../../movie.js";
 
 export default class MovieForm extends React.Component {
   constructor(props) {
@@ -19,7 +19,6 @@ export default class MovieForm extends React.Component {
         }
       });
       this.setState({
-        // route components are rendered with useful information, like URL params
         movie: movie
       });
     }
@@ -75,7 +74,7 @@ export default class MovieForm extends React.Component {
   }
 
   handleReset() {
-    if(this.props.onReset && this.state.movie.id) {
+    if(this.state.movie.id) {
       this.props.onReset();
     }
     this.setState({
@@ -83,3 +82,9 @@ export default class MovieForm extends React.Component {
     });
   }
 }
+
+MovieForm.propTypes = {
+  movie: PropTypes.array.isRequired,
+  onUserInput: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired
+};

@@ -1,30 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, Link, browserHistory } from "react-router";
-import MovieApp from "./js/movieApp.js";
-import MovieList from "./js/movieList.js";
-import MovieForm from "./js/movieForm.js";
+import { Provider } from "react-redux";
+import store from "./js/store";
 
-class App extends React.Component {
-  render () {
-    return (
-      <div className="app">
-        <h1>Movies App</h1>
-        <ul role="nav">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/movies">List</Link></li>
-        </ul>
-        {this.props.children}
-      </div>
-    );
-  }
-}
+import MainLayout from "./js/components/layouts/main-layout.js"
+import Home from "./js/components/home.js";
+import MovieListContainer from "./js/components/containers/movie-list-container.js";
+import MovieFormContainer from "./js/components/containers/movie-form-container.js";
 
 ReactDOM.render((
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <Route path="movies" component={MovieApp} />
-      <Route path="movie/:movieId" component={MovieForm} />
-    </Route>
-  </Router>
-), document.getElementById('app'));
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route component={MainLayout}>
+        <Route path="/" component={Home} />
+        <Route path="movies" component={MovieListContainer} />
+        <Route path="movie" component={MovieFormContainer} />
+        <Route path="movie/:movieId" component={MovieFormContainer} />
+      </Route>
+    </Router>
+  </Provider>
+), document.getElementById("app"));
