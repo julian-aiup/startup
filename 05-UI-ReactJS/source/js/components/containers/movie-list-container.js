@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onDelete: (movieId) => {
-      console.log(dispatch(deleteMovie(movieId)));
+      dispatch(deleteMovie(movieId));
     }
   }
 }

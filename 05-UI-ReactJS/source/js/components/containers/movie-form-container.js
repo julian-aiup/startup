@@ -1,21 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import MovieForm from "../views/movie-list";
-import { addMovie } from "../../actions/movie-actions.js"
+import MovieForm from "../views/movie-form";
+import { addMovie, updateMovie } from "../../actions/movie-actions.js"
+import { bindActionCreators } from "redux";
 
 const mapStateToProps = (state) => {
   return {
     movies: state.movieReducer.movies
   };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onSubmit: (movie) => {
-      dispatch(addMovie(movie));
-    }
-  }
 }
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({
+    onSubmitAdd: addMovie,
+    onSubmitUpdate: updateMovie
+  }, dispatch);
 
 export default connect(
   mapStateToProps,

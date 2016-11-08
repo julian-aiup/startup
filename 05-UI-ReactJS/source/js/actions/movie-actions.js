@@ -1,12 +1,5 @@
 import * as types from "../actions/action-types";
 
-export function getMovie(movieId) {
-  return {
-    type: types.GET_MOVIE,
-    movieId
-  };
-}
-
 export function addMovie(movie) {
   return {
     type: types.ADD_MOVIE,

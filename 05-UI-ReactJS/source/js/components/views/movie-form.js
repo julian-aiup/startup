@@ -1,27 +1,14 @@
-import React from "react";
+import React, { PropTypes } from "react";
 import Movie from "../../movie.js";
+import store from "../../store";
 
 export default class MovieForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleReset = this.handleReset.bind(this);
     this.state = {
       movie: new Movie()
     };
-  }
-
-  componentDidMount() {
-    if(this.props.params) {
-      let movie = JSON.parse(localStorage["movies"]).find((element) => {
-        if(this.props.params.movieId === element.id.toString()) {
-          return element;
-        }
-      });
-      this.setState({
-        movie: movie
-      });
-    }
   }
 
   render() {
@@ -46,17 +33,23 @@ export default class MovieForm extends React.Component {
           </label>
           <div className="movie-buttons">
             <button type="submit" className="movie-button">Save movie</button>
-            <button type="button" onClick={this.handleReset} className="movie-button">Reset</button>
           </div>
         </form>
       </div>
     );
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      movie: nextProps.selectedMovie
-    });
+  componentDidMount() {
+    if(this.props.params) {
+      let movie = store.getState().movieReducer.movies.find((movie) => {
+        if(this.props.params.movieId === movie.id.toString()) {
+          return movie;
+        }
+      });
+      this.setState({
+        movie
+      });
+    }
   }
 
   handleChange(key, event) {
@@ -67,24 +60,16 @@ export default class MovieForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if(this.props.onUserInput) {
-      this.props.onUserInput(this.state.movie);
+    if(!this.state.movie.id) {
+      movie["id"] = Date.now();
+      this.props.actions.onSubmitAdd(this.state.movie);
+    } else {
+      this.props.onSubmitUpdate(this.state.movie);
     }
-    this.handleReset();
-  }
-
-  handleReset() {
-    if(this.state.movie.id) {
-      this.props.onReset();
-    }
-    this.setState({
-      movie: new Movie()
-    });
   }
 }
 
 MovieForm.propTypes = {
-  movie: PropTypes.array.isRequired,
-  onUserInput: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired
+  onSubmitAdd: React.PropTypes.func.isRequired,
+  onSubmitUpdate: React.PropTypes.func.isRequired
 };
