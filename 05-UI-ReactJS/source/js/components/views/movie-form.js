@@ -1,6 +1,7 @@
 import React, { PropTypes } from "react";
 import Movie from "../../movie.js";
 import store from "../../store";
+import { browserHistory } from 'react-router';
 
 export default class MovieForm extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class MovieForm extends React.Component {
     this.state.movie.id ? mode = "editing" : mode = "creating";
     return (
       <div className="movie-form">
-        <h3>Movie</h3>
+        <h3>Movie Form</h3>
         <h5 className="mode">You are {mode} a movie.</h5>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="title" className="movie-label">
@@ -40,14 +41,22 @@ export default class MovieForm extends React.Component {
   }
 
   componentDidMount() {
-    if(this.props.params) {
-      let movie = store.getState().movieReducer.movies.find((movie) => {
+    if(this.props.params.movieId) {
+      let movie = this.props.movies.find((movie) => {
         if(this.props.params.movieId === movie.id.toString()) {
           return movie;
         }
       });
       this.setState({
         movie
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.location.pathname === "/movie") {
+      this.setState({
+        movie: new Movie()
       });
     }
   }
@@ -60,16 +69,20 @@ export default class MovieForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    let movie;
     if(!this.state.movie.id) {
-      movie["id"] = Date.now();
-      this.props.actions.onSubmitAdd(this.state.movie);
+      movie = this.state.movie;
+      movie.id = Date.now();
+      this.props.onSubmitAdd(this.state.movie);
     } else {
       this.props.onSubmitUpdate(this.state.movie);
     }
+    browserHistory.push("/movies");
   }
 }
 
 MovieForm.propTypes = {
-  onSubmitAdd: React.PropTypes.func.isRequired,
-  onSubmitUpdate: React.PropTypes.func.isRequired
+  movies: PropTypes.array.isRequired,
+  onSubmitAdd: PropTypes.func.isRequired,
+  onSubmitUpdate: PropTypes.func.isRequired
 };

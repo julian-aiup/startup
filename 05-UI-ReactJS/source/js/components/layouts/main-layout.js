@@ -9,6 +9,7 @@ export default class MainLayout extends React.Component {
         <ul role="nav">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/movies">List</Link></li>
+          <li><Link to={"/movie"}>New Movie</Link></li>
         </ul>
         {this.props.children}
       </div>

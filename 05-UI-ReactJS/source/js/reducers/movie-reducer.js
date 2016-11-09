@@ -9,10 +9,8 @@ export default (state = initialState, action) => {
   switch(action.type) {
 
     case types.ADD_MOVIE:
-      return [
-        ...state,
-        action.movie
-      ]
+      let newMovies = state.movies.concat(action.movie);
+      return Object.assign({}, state, { movies: newMovies });
 
     case types.UPDATE_MOVIE:
       let updateMovies = state.movies;

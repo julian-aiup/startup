@@ -6,12 +6,14 @@ export default class MovieList extends React.Component {
     if(!this.props.movies.length) {
       return (
         <div className="movies-table">
+          <h3>Movie List</h3>
           <h3 className="no-movies">No movies to show</h3>
         </div>
       );
     } else {
       return (
         <div className="movies-table">
+          <h3>Movie List</h3>
           <table>
             <thead>
               <tr>
