@@ -4,10 +4,12 @@ export default class PlayGame extends React.Component {
   constructor(props) {
     var countries;
     super(props);
-    this.state = {
-      countries: []
-    };
     this.selectCountries = this.selectCountries.bind(this);
+    this.selectCorrectCountry = this.selectCorrectCountry.bind(this);
+    this.selectIncorrectCountries = this.selectIncorrectCountries.bind(this);
+    this.state = {
+      countriesOptions: []
+    };
   }
 
   render() {
@@ -19,42 +21,76 @@ export default class PlayGame extends React.Component {
   }
 
   componentWillMount() {
-    fetch("http://api.geonames.org/countryInfoJSON?username=julian.aiup")
-      .then((response) => {
-        return response.json()
-      })
-      .then((countries) => {
-        this.setState({ countries: countries.geonames });
-        this.selectCountries();
-      });
+    // If the storage object hasn't already been populated
+    if(!sessionStorage.getItem("countries")) {
+      fetch("http://api.geonames.org/countryInfoJSON?username=julian.aiup")
+        .then((response) => {
+          return response.json()
+        })
+        .then((countries) => {
+          // Save countries to sessionStorage
+          sessionStorage.setItem("countries", JSON.stringify(countries.geonames));
+          // Select countries options
+          this.selectCountries();
+        });
+    } else {
+      // Select countries options
+      this.selectCountries();
+    }
   }
 
   selectCountries() {
-    let countriesOptions = [];
-    const totalOptions = 3;
-    let correctCountryPosition;
-    let correctCountryInfo;
-    let correctCountry;
-    let option;
-    // Selects one of the countries randomly (between 0 and the quantity of countries)
-    correctCountryPosition = Math.floor(Math.random() * this.state.countries.length);
-    console.log(correctCountryPosition);
-    // Store country info in variable
-    correctCountryInfo = this.state.countries[correctCountryPosition];
+    let countriesJSON = JSON.parse(sessionStorage.getItem("countries"));
+    this.selectCorrectCountry(countriesJSON);
+    this.selectIncorrectCountries(countriesJSON);
+  }
 
-    correctCountry = Object.assign({}, { position: correctCountryPosition }, { info: correctCountryInfo }, { correct: true });
-    countriesOptions = countriesOptions.concat(correctCountry);
-    console.log(countriesOptions);
+  selectCorrectCountry(countriesJSON) {
+    // Selects the correct country randomly (between 0 and the quantity of countries)
+    let correctCountryPosition = Math.floor(Math.random() * countriesJSON.length);
+    // Select country from correctCountryPosition and store country info in variable
+    let correctCountryInfo = countriesJSON[correctCountryPosition];
+    // Create the correct country option and add it to the array
+    let correctCountryOption = Object.assign(
+      {},
+      { position: correctCountryPosition },
+      { info: correctCountryInfo },
+      { correct: true }
+    );
+    let countriesOptions = this.state.countriesOptions.concat(correctCountryOption);
+    this.setState({
+      countriesOptions
+    });
+  }
+
+  selectIncorrectCountries(countriesJSON) {
     // Selects other resting options
-    option = 0;
-    while(option < totalOptions) {
-
-
-      country = countriesOptions.find((country) => {
-        if(this.props.params.movieId === movie.id.toString()) {
-          return movie;
-        }))
-      if()
+    const TOTAL_OPTIONS = 3;
+    let option = 0;
+    let incorrectCountryPosition;
+    let indexCountry;
+    let incorrectCountryInfo;
+    let incorrectCountryOption;
+    while(option < TOTAL_OPTIONS) {
+      incorrectCountryPosition = Math.floor(Math.random() * countriesJSON.length);
+      // Equals -1 when isn't already selected
+      indexCountry = this.state.countriesOptions.findIndex((arrayCountry) => {
+          return incorrectCountryPosition === arrayCountry.position
+        }
+      );
+      if(indexCountry === -1) {
+        // Create a new incorrect country option and add it to the array
+        incorrectCountryInfo = countriesJSON[incorrectCountryPosition];
+        incorrectCountryOption = Object.assign(
+          {},
+          { position: incorrectCountryPosition },
+          { info: incorrectCountryInfo },
+          { correct: false }
+        );
+        let countriesOptions = this.state.countriesOptions.concat(incorrectCountryOption);
+        this.setState({
+          countriesOptions
+        });
         option++;
       }
     }
