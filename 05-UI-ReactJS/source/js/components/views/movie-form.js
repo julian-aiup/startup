@@ -1,12 +1,12 @@
-import React, { PropTypes } from "react";
+import React from "react";
 import Movie from "../../movie.js";
-import store from "../../store";
 import { browserHistory } from 'react-router';
 
 export default class MovieForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getInput = this.getInput.bind(this);
     this.state = {
       movie: new Movie()
     };
@@ -14,7 +14,7 @@ export default class MovieForm extends React.Component {
 
   render() {
     let mode;
-    this.state.movie.id ? mode = "editing" : mode = "creating";
+    mode = (this.state.movie.id) ? "editing" : "creating";
     return (
       <div className="movie-form">
         <h3>Movie Form</h3>
@@ -22,15 +22,15 @@ export default class MovieForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="title" className="movie-label">
             Title:
-            <input onChange={this.handleChange.bind(this, "title")} value={this.state.movie.title} className="movie-input" />
+            {this.getInput("title")}
           </label>
           <label htmlFor="year" className="movie-label">
             Year:
-            <input onChange={this.handleChange.bind(this, "year")} value={this.state.movie.year} className="movie-input" />
+            {this.getInput("year")}
           </label>
           <label htmlFor="duration" className="movie-label">
             Duration:
-            <input onChange={this.handleChange.bind(this, "duration")} value={this.state.movie.duration} className="movie-input" />
+            {this.getInput("duration")}
           </label>
           <div className="movie-buttons">
             <button type="submit" className="movie-button">Save movie</button>
@@ -79,10 +79,19 @@ export default class MovieForm extends React.Component {
     }
     browserHistory.push("/movies");
   }
+
+  getInput(key) {
+    const props = {
+      onChange: this.handleChange.bind(this, key),
+      value: this.state.movie[key],
+      className: "movie-input"
+    }
+    return <input {...props} />;
+  }
 }
 
 MovieForm.propTypes = {
-  movies: PropTypes.array.isRequired,
-  onSubmitAdd: PropTypes.func.isRequired,
-  onSubmitUpdate: PropTypes.func.isRequired
+  movies: React.PropTypes.array.isRequired,
+  onSubmitAdd: React.PropTypes.func.isRequired,
+  onSubmitUpdate: React.PropTypes.func.isRequired
 };
