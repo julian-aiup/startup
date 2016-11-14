@@ -15,7 +15,7 @@ export default class PlayGame extends React.Component {
   render() {
     return (
       <div className="play-game">
-        <h3>Holaaa</h3>
+        <h3>Hola</h3>
       </div>
     );
   }
@@ -38,6 +38,9 @@ export default class PlayGame extends React.Component {
       this.selectCountries();
     }
   }
+
+  // componentDidMount() {
+  // }
 
   selectCountries() {
     let countriesJSON = JSON.parse(sessionStorage.getItem("countries"));
@@ -71,6 +74,7 @@ export default class PlayGame extends React.Component {
     let indexCountry;
     let incorrectCountryInfo;
     let incorrectCountryOption;
+    let countriesOptions;
     while(option < TOTAL_OPTIONS) {
       incorrectCountryPosition = Math.floor(Math.random() * countriesJSON.length);
       // Equals -1 when isn't already selected
@@ -87,7 +91,7 @@ export default class PlayGame extends React.Component {
           { info: incorrectCountryInfo },
           { correct: false }
         );
-        let countriesOptions = this.state.countriesOptions.concat(incorrectCountryOption);
+        countriesOptions = this.state.countriesOptions.concat(incorrectCountryOption);
         this.setState({
           countriesOptions
         });
