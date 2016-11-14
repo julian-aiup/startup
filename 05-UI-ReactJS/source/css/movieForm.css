@@ -1,0 +1,39 @@
+/*--- movieForm.css ---*/
+/*--- BOX PROPERTIES ---*/
+.mode {
+  position: relative;
+}
+
+.movie-button {
+  margin-left: 10px;
+}
+
+.movie-buttons {
+  margin-top: 10px;
+  position: relative;
+}
+
+.movie-form {
+  position: relative;
+}
+
+.movie-input {
+  margin-left: 20px;
+}
+
+.movie-label {
+  display: block;
+  margin-top: 10px;
+  position: relative;
+}
+
+/*--- BOX BORDERS ---*/
+
+/*--- BACKGROUND PROPERTIES ---*/
+
+/*--- TEXT PROPERTIES ---*/
+.mode {
+  color: blue;
+}
+
+/*--- TRANSITIONS ---*/
