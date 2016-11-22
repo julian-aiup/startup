@@ -1,4 +1,4 @@
-import { getCountriesOptions } from "../../api/country-api.js";
+import CountryAPI from "../../api/country-api.js";
 import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 
@@ -10,7 +10,7 @@ export default class PlayGame extends React.Component {
     this.getButtondisabledBackgroundColor = this.getButtondisabledBackgroundColor.bind(this);
     this.getDisabled = this.getDisabled.bind(this);
     this.state = {
-      countriesOptions: [],
+      countriesOptions: CountryAPI.getCountriesOptions(),
       selectedCountry: null
     };
   }
