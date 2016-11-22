@@ -8,17 +8,40 @@
   height: 30px;
 }
 
+/* --- large screens --- */
+@media only screen
+and (min-device-width : 800px) {
+  .play-game {
+    width: 50%;
+  }
+
+  .flag {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+/* --- small screens --- */
+@media only screen
+and (max-device-width : 800px) {
+  .play-game {
+    width: 100%;
+  }
+
+  .flag {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
 .play-game {
   margin: auto;
-  width: 50%;
+  max-width: 100%;
+  min-width: 50%;
 }
 
 .countryOption {
-  margin: 10px;
-}
-
-.flag {
-  height: 300px;
-  margin: auto;
-  width: 600px;
+  margin-top: 10px;
 }

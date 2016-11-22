@@ -1,4 +1,5 @@
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import { browserHistory } from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import IconButton from 'material-ui/IconButton';
@@ -7,7 +8,6 @@ import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import MenuItem from 'material-ui/MenuItem';
 import React from 'react';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
-import { browserHistory } from 'react-router';
 
 injectTapEventPlugin();
 

@@ -1,7 +1,7 @@
+import { browserHistory, IndexRoute, Router, Route } from "react-router";
+import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route, browserHistory } from "react-router";
-import { Provider } from "react-redux";
 
 //import store from "./js/store.js";
 import MainLayout from "./js/components/layouts/main-layout.js"
@@ -10,8 +10,8 @@ import PlayGameContainer from "./js/components/containers/play-game-container.js
 
 ReactDOM.render((
     <Router history={browserHistory}>
-      <Route component={MainLayout}>
-        <Route path="/" component={Home} />
+      <Route path="/" component={MainLayout}>
+        <IndexRoute component={Home} />
         <Route path="playGame" component={PlayGameContainer} />
       </Route>
     </Router>
