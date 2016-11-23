@@ -45,3 +45,7 @@ and (max-device-width : 800px) {
 .countryOption {
   margin-top: 10px;
 }
+
+.login {
+  text-align: center;
+}

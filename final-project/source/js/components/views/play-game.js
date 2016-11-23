@@ -1,4 +1,5 @@
-import CountryAPI from "../../api/country-api.js";
+import CircularProgress from 'material-ui/CircularProgress';
+import getCountriesOptions from "../../utils/country-api.js";
 import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 
@@ -10,7 +11,8 @@ export default class PlayGame extends React.Component {
     this.getButtondisabledBackgroundColor = this.getButtondisabledBackgroundColor.bind(this);
     this.getDisabled = this.getDisabled.bind(this);
     this.state = {
-      countriesOptions: CountryAPI.getCountriesOptions(),
+      countriesOptions: [],
+      correctCountryPosition: null,
       selectedCountry: null
     };
   }
@@ -20,14 +22,21 @@ export default class PlayGame extends React.Component {
   }
 
   componentWillMount() {
+    let correctCountryPosition;
     // Select countries options and store in state
-    this.setState({ countriesOptions: getCountriesOptions() })
+    getCountriesOptions((countriesOptions) => {
+      correctCountryPosition = countriesOptions.findIndex((element) => {
+        return element.correct;
+      });
+      this.setState({ countriesOptions, correctCountryPosition });
+    });
   }
 
   renderLoading() {
     return (
       <div className="play-game">
-        <h3>Hola</h3>
+        <h3 className="loading">Loading game! Please wait</h3>
+        <CircularProgress size={80} thickness={5} />
       </div>
     );
   }
@@ -36,7 +45,7 @@ export default class PlayGame extends React.Component {
     return (
       <div className="play-game">
         <h3>Game</h3>
-        <img src={`http://www.geonames.org/flags/x/${ this.state.countriesOptions[0].info.countryCode.toLowerCase() }.gif`} className="flag" />
+        <img src={`http://www.geonames.org/flags/x/${ this.state.countriesOptions[this.state.correctCountryPosition].info.countryCode.toLowerCase() }.gif`} className="flag" />
         {this.state.countriesOptions.map((country) => {
           return(
             <RaisedButton
