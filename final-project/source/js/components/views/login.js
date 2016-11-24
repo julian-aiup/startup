@@ -2,7 +2,7 @@ import AuthService from '../../utils/AuthService';
 import React, { PropTypes as T } from 'react';
 import RaisedButton from "material-ui/RaisedButton";
 
-export class Login extends React.Component {
+class Login extends React.Component {
   static contextTypes: {
     router: T.object
   }

@@ -1,6 +1,6 @@
+import AuthService from '../../utils/AuthService.js';
 import React from 'react';
 import {Route, IndexRedirect} from 'react-router';
-import AuthService from '../../utils/AuthService.js';
 
 import MainLayout from "../layouts/main-layout.js";
 import Home from "./home.js";

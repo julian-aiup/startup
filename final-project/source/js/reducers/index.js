@@ -1,8 +1,8 @@
-import { combineReducers } from "redux";
-// import movieReducer from "./movie-reducer.js";
+import { combineReducers } from 'redux';
+import firedux from '../store/firedux.js';
 
-const reducer = combineReducers({
-  // movieReducer
+const rootReducer = combineReducers({
+  firedux: firedux.reducer()
 })
 
-export default reducer
+export default rootReducer

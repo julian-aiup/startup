@@ -1,18 +1,19 @@
 import App from './js/app.js';
 import {browserHistory} from 'react-router';
+import firedux from './store/firedux'
 import makeRoutes from './js/routes.js';
+import { Provider } from "react-redux";
 import React from 'react';
 import ReactDOM from 'react-dom';
+import store from "./js/store";
 
-import { Provider } from "react-redux";
-//import store from "./js/store.js";
+firedux.watch('');
 
 const routes = makeRoutes();
 const mountNode = document.querySelector('#app');
 
 ReactDOM.render((
-  <App history={browserHistory} routes={routes} />
+  <Provider store={store}>
+    <App history={browserHistory} routes={routes} />
+  </Provider>
 ), mountNode);
-
-{/* <Provider store={store}>
-</Provider> */}
