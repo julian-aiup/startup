@@ -1,7 +1,6 @@
 import AuthService from '../../utils/AuthService';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import { browserHistory } from 'react-router';
-import DatabaseInterface from '../../data-utils/firebase-interface';
 import Drawer from 'material-ui/Drawer';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import IconButton from 'material-ui/IconButton';
@@ -59,7 +58,8 @@ export default class MainLayout extends React.Component {
             <IconButton onTouchTap={this.handleToggle}>
               <MenuIcon />
             </IconButton>
-            Countries<img src='https://upload.wikimedia.org/wikipedia/commons/5/5d/White_flag_icon.svg' alt='Flag' className='flag-ico'/>
+            Countries
+            <img src='https://upload.wikimedia.org/wikipedia/commons/5/5d/White_flag_icon.svg' alt='Flag' className='flag-ico'/>
           </ToolbarGroup>
           <ToolbarGroup lastChild={true} className='header--right'>
             { this.renderProfile() }
@@ -74,7 +74,9 @@ export default class MainLayout extends React.Component {
           <MenuItem onTouchTap={this.handleHome}>Home</MenuItem>
           <MenuItem onTouchTap={this.handlePlayGame}>Play game</MenuItem>
         </Drawer>
-        {children}
+        <div className='content'>
+          {children}
+        </div>
       </div>
     );
     }
@@ -106,7 +108,13 @@ export default class MainLayout extends React.Component {
         return(
           <div>
             {this.state.profile.name}
-            <RaisedButton primary={true} onClick={this.logout.bind(this)}>Logout</RaisedButton>
+            <RaisedButton
+              primary={true}
+              onClick={this.logout.bind(this)}
+              className='logout'
+            >
+              Logout
+            </RaisedButton>
           </div>
         );
       }

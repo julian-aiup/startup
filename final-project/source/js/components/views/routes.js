@@ -4,7 +4,7 @@ import {Route, IndexRedirect} from 'react-router';
 
 import MainLayout from "../layouts/main-layout.js";
 import Home from "./home.js";
-import PlayGameContainer from "../containers/play-game-container.js";
+import PlayGame from "./play-game.js";
 import Login from "./login.js";
 
 const auth = new AuthService('xoZIPD4lfj3dpDrePlhfhqPhT6cZKGPX', 'julian-aiup.auth0.com');
@@ -22,7 +22,7 @@ export const makeMainRoutes = () => {
       <IndexRedirect to="/home" />
       <Route path="home" component={Home} />
       <Route path="login" component={Login} />
-      <Route path="playGame" component={PlayGameContainer} onEnter={requireAuth} />
+      <Route path="playGame" component={PlayGame} onEnter={requireAuth} />
     </Route>
   )
 }

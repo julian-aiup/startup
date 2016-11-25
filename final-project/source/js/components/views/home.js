@@ -1,5 +1,4 @@
 import AuthService from '../../utils/AuthService';
-import { browserHistory } from 'react-router';
 import RaisedButton from "material-ui/RaisedButton";
 import React, { PropTypes as T } from "react";
 

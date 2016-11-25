@@ -1,19 +1,24 @@
 import App from './js/app.js';
 import {browserHistory} from 'react-router';
-import firedux from './store/firedux'
+import firebase from 'firebase';
 import makeRoutes from './js/routes.js';
-import { Provider } from "react-redux";
 import React from 'react';
 import ReactDOM from 'react-dom';
-import store from "./js/store";
-
-firedux.watch('');
 
 const routes = makeRoutes();
 const mountNode = document.querySelector('#app');
 
-ReactDOM.render((
-  <Provider store={store}>
-    <App history={browserHistory} routes={routes} />
-  </Provider>
-), mountNode);
+// Initialize Firebase
+let config = {
+  apiKey: "AIzaSyCilnoihsxJyUE2RQjq4-JEcOXNrsz631g",
+  authDomain: "countries-ba19c.firebaseapp.com",
+  databaseURL: "https://countries-ba19c.firebaseio.com",
+  storageBucket: "countries-ba19c.appspot.com",
+  messagingSenderId: "281058127248"
+};
+firebase.initializeApp(config);
+
+ReactDOM.render(
+  (<App history={browserHistory} routes={routes} />),
+  mountNode
+);
