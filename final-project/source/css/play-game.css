@@ -27,7 +27,7 @@ and (max-device-width : 800px) {
   margin-top: 10px;
 }
 
-.result {
+.loading {
   background-color: grey;
   position: fixed;
   top: 40%;
@@ -37,12 +37,12 @@ and (max-device-width : 800px) {
   border-radius: 25px;
 }
 
-.result h2 {
+.loading h2 {
   margin-top: 20px;
   margin-left: 30%;
 }
 
-.result .progress {
+.loading .progress {
   margin-bottom: 20px;
   margin-left: 30%;
 }

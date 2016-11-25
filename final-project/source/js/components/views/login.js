@@ -9,16 +9,16 @@ class Login extends React.Component {
 
   render() {
     const { auth } = this.props;
-    if(auth.getProfile().name) {
+    if(Object.keys(auth.getProfile()).length !== 0) {
       return (
         <div className='login'>
-          <h2>You're already logged in as {auth.getProfile().name}!</h2>
+          <h2>You're already logged in as { auth.getProfile().name }!</h2>
         </div>
       );
     } else {
       return (
         <div className='login'>
-          <h2>Please, login to play the game.</h2>
+          <h2>Please login to play the game.</h2>
           <div>
             <RaisedButton primary={true} onTouchTap={auth.login.bind(this)}>Login</RaisedButton>
           </div>

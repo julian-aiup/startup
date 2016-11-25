@@ -1,11 +1,10 @@
 import AuthService from '../../utils/AuthService.js';
+import Home from "./home.js";
+import Login from "./login.js";
+import MainLayout from "../layouts/main-layout.js";
+import PlayGame from "./play-game.js";
 import React from 'react';
 import {Route, IndexRedirect} from 'react-router';
-
-import MainLayout from "../layouts/main-layout.js";
-import Home from "./home.js";
-import PlayGame from "./play-game.js";
-import Login from "./login.js";
 import TopPlayers from "./top-players.js";
 
 const auth = new AuthService('xoZIPD4lfj3dpDrePlhfhqPhT6cZKGPX', 'julian-aiup.auth0.com');

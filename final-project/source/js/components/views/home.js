@@ -24,7 +24,7 @@ class Home extends React.Component {
   }
 
   updatePoints() {
-    if (this.state.profile.name) {
+    if(Object.keys(this.state.profile).length !== 0) {
       let userPoints = `users/${this.state.profile.user_id}/points`;
       let thisHome = this;
       firebase.database().ref(userPoints).once('value').then(function(snapshot) {
@@ -42,7 +42,7 @@ class Home extends React.Component {
   }
 
   render () {
-    if(this.state.profile.name) {
+    if(Object.keys(this.state.profile).length !== 0) {
       return(
         <div className="home-page">
           <h2>Welcome to Countries Trivia { this.state.profile.name }!</h2>

@@ -16,17 +16,18 @@ injectTapEventPlugin();
 export default class MainLayout extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {open: false};
     this.handleToggle = this.handleToggle.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleHome = this.handleHome.bind(this);
     this.handlePlayGame = this.handlePlayGame.bind(this);
     this.handleTopPlayers = this.handleTopPlayers.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
     this.renderProfile = this.renderProfile.bind(this);
     props.route.auth.on('profile_updated', (newProfile) => {
       this.setState({profile: newProfile});
     });
     this.state = {
+      open: false,
       profile: props.route.auth.getProfile()
     };
   }
@@ -38,7 +39,6 @@ export default class MainLayout extends React.Component {
   logout(){
     this.props.route.auth.logout();
     browserHistory.push('/login');
-    // this.context.router.push('/login');
   }
 
   render () {
@@ -46,12 +46,8 @@ export default class MainLayout extends React.Component {
     if (this.props.children) {
       children = React.cloneElement(this.props.children, {
         auth: this.props.route.auth //sends auth instance to children
-      })
+      });
     }
-    if(!Object.keys(this.state.profile).length === 0) {
-      const { profile } = this.state;
-    }
-
     return (
       <div className='app'>
         <Toolbar className='header'>
@@ -73,6 +69,7 @@ export default class MainLayout extends React.Component {
           onRequestChange={(open) => this.setState({open})}
         >
           <MenuItem onTouchTap={this.handleHome}>Home</MenuItem>
+          <MenuItem onTouchTap={this.handleLogin}>Login</MenuItem>
           <MenuItem onTouchTap={this.handlePlayGame}>Play game</MenuItem>
           <MenuItem onTouchTap={this.handleTopPlayers}>Top players</MenuItem>
         </Drawer>
@@ -108,6 +105,11 @@ export default class MainLayout extends React.Component {
     handleTopPlayers () {
       this.handleClose();
       browserHistory.push("/topPlayers");
+    }
+
+    handleLogin () {
+      this.handleClose();
+      browserHistory.push("/login");
     }
 
     renderProfile() {

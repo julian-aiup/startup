@@ -42,18 +42,21 @@ export default class PlayGame extends React.Component {
 
   renderLoading() {
     return (
-      <div className="play-game">
-        <h3 className="loading">Loading game! Please wait</h3>
-        <CircularProgress size={80} thickness={5} />
+      <div className='play-game'>
+        <div className='loading'>
+          <h2>Loading game! Please wait</h2>
+          <CircularProgress className='progress' size={80} thickness={5} />
+        </div>
       </div>
     );
   }
 
   renderGame() {
+    const countryCode = this.state.countriesOptions[this.state.correctCountryPosition].info.countryCode.toLowerCase();
     return (
       <div className="play-game">
         {this.renderAnswered()}
-        <img src={`http://www.geonames.org/flags/x/${ this.state.countriesOptions[this.state.correctCountryPosition].info.countryCode.toLowerCase() }.gif`} className="flag" />
+        <img src={`http://www.geonames.org/flags/x/${ countryCode }.gif`} className="flag" />
         {this.state.countriesOptions.map((country) => {
           return(
             <RaisedButton
@@ -80,8 +83,8 @@ export default class PlayGame extends React.Component {
         textResult = 'You lost';
       }
       return(
-        <div className='result'>
-          <h2>{textResult}</h2>
+        <div className='loading'>
+          <h2>{ textResult }</h2>
           <CircularProgress
             className='progress'
             mode="determinate"
