@@ -1,5 +1,6 @@
 import Auth0Lock from 'auth0-lock';
 import { EventEmitter } from 'events';
+import firebase from 'firebase';
 import { isTokenExpired } from './jwtHelper';
 import { browserHistory } from 'react-router';
 
@@ -24,16 +25,29 @@ export default class AuthService extends EventEmitter {
   _doAuthentication(authResult){
     // Saves the user token
     this.setToken(authResult.idToken)
-    // navigate to the home route
-    browserHistory.replace('/home')
     // Async loads the user profile data
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {
         console.log('Error loading the Profile', error)
       } else {
-        this.setProfile(profile)
+        this.setProfile(profile);
+        let usersDb = `users/${ profile.user_id }`;
+        firebase.database().ref(usersDb).once('value').then(function(snapshot) {
+          if(!snapshot.val()) {
+            firebase.database().ref(usersDb).set({
+              name: profile.name,
+              points: 0
+            }).then(() => {
+              // navigate to the home route
+              browserHistory.replace('/home');
+            });
+          } else {
+            // navigate to the home route
+            browserHistory.replace('/home');
+          }
+        });
       }
-    })
+    });
   }
 
   _authorizationError(error){

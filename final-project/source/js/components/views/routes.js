@@ -6,6 +6,7 @@ import MainLayout from "../layouts/main-layout.js";
 import Home from "./home.js";
 import PlayGame from "./play-game.js";
 import Login from "./login.js";
+import TopPlayers from "./top-players.js";
 
 const auth = new AuthService('xoZIPD4lfj3dpDrePlhfhqPhT6cZKGPX', 'julian-aiup.auth0.com');
 
@@ -23,6 +24,7 @@ export const makeMainRoutes = () => {
       <Route path="home" component={Home} />
       <Route path="login" component={Login} />
       <Route path="playGame" component={PlayGame} onEnter={requireAuth} />
+      <Route path="topPlayers" component={TopPlayers} />
     </Route>
   )
 }

@@ -9,7 +9,6 @@ class Login extends React.Component {
 
   render() {
     const { auth } = this.props;
-    console.log(auth.getProfile());
     if(auth.getProfile().name) {
       return (
         <div className='login'>

@@ -113,12 +113,6 @@ export default class PlayGame extends React.Component {
         // If the user wins, sum one point
         if (this.state.selectedCountry === this.state.countriesOptions[this.state.correctCountryPosition]) {
           let firebaseRef = firebase.database().ref(`users/${this.props.auth.getProfile().user_id}/points`);
-          // let userRef = firebaseRef.child();
-          // userRef.update({
-          //   "points": userRef.
-          // });
-
-          // var upvotesRef = db.ref("server/saving-data/fireblog/posts/-JRHTHaIs-jNPLXOQivY/upvotes");
           firebaseRef.transaction(function (current_value) {
             return (current_value || 0) + 1;
           });

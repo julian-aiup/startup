@@ -3,38 +3,28 @@ import firebase from 'firebase';
 import RaisedButton from "material-ui/RaisedButton";
 import React, { PropTypes as T } from "react";
 
-class Home extends React.Component {
+class TopPlayers extends React.Component {
   constructor(props, context) {
     super(props, context);
-    if(props.auth) {
-      this.updatePoints = this.updatePoints.bind(this);
-      this.state = {
-        profile: props.auth.getProfile(),
-        points: 0
-      };
-      props.auth.on('profile_updated', (newProfile) => {
-        this.setState(
-          { profile: newProfile },
-          () => {
-            this.updatePoints();
-          }
-        );
-      });
-    }
+    this.state = {
+      topPlayers: []
+    };
+    this.getTopPlayers = this.getTopPlayers.bind(this);
+    this.getTopPlayers();
   }
 
-  updatePoints() {
-    if (this.state.profile.name) {
-      let userPoints = `users/${this.state.profile.user_id}/points`;
-      let thisHome = this;
-      firebase.database().ref(userPoints).once('value').then(function(snapshot) {
-        thisHome.setState({ points: snapshot.val() });
+  getTopPlayers() {
+    let usersDb = `users`;
+    let thisHome = this;
+    let users = [];
+    firebase.database().ref(usersDb).orderByChild("points").limitToFirst(2).once('value').then(function(snapshot) {
+      let usersKeys = snapshot.val();
+      Object.keys(usersKeys).forEach((user) => {
+        users.push({ name: usersKeys[user].name , points: usersKeys[user].points });
       });
-    }
-  }
-
-  componentDidMount() {
-    this.updatePoints();
+      users.reverse();
+      this.setState({ topPlayers: users });
+    });
   }
 
   static contextTypes: {
@@ -42,6 +32,7 @@ class Home extends React.Component {
   }
 
   render () {
+    return <h1>hola</h1>;
     if(this.state.profile.name) {
       return(
         <div className="home-page">
@@ -62,8 +53,8 @@ class Home extends React.Component {
   }
 }
 
-Home.propTypes = {
+TopPlayers.propTypes = {
   auth: T.instanceOf(AuthService)
 };
 
-export default Home;
+export default TopPlayers;

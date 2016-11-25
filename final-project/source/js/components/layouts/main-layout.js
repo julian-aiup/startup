@@ -21,6 +21,7 @@ export default class MainLayout extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleHome = this.handleHome.bind(this);
     this.handlePlayGame = this.handlePlayGame.bind(this);
+    this.handleTopPlayers = this.handleTopPlayers.bind(this);
     this.renderProfile = this.renderProfile.bind(this);
     props.route.auth.on('profile_updated', (newProfile) => {
       this.setState({profile: newProfile});
@@ -73,6 +74,7 @@ export default class MainLayout extends React.Component {
         >
           <MenuItem onTouchTap={this.handleHome}>Home</MenuItem>
           <MenuItem onTouchTap={this.handlePlayGame}>Play game</MenuItem>
+          <MenuItem onTouchTap={this.handleTopPlayers}>Top players</MenuItem>
         </Drawer>
         <div className='content'>
           {children}
@@ -101,6 +103,11 @@ export default class MainLayout extends React.Component {
     handlePlayGame () {
       this.handleClose();
       browserHistory.push("/playGame");
+    }
+
+    handleTopPlayers () {
+      this.handleClose();
+      browserHistory.push("/topPlayers");
     }
 
     renderProfile() {
